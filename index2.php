@@ -6,11 +6,26 @@
     <title>Home</title>
     <link rel="stylesheet" href="assets/stylesheets/main.css">
 </head>
+<?php 
+	if (isset($_POST['posX']))
+	{
+        $posArray['X'] = $_POST['posX'];
+        $posArray['Y'] = $_POST['posY'];
+        $posArray['Z'] = $_POST['posZ'];
+    }
+    else{
+        $posArray['X'] = 0;
+        $posArray['Y'] = 0;
+        $posArray['Z'] = 1;
+    }
+
+?>
 <body>
-    <form id="position" onchange="updateCube()">
-        X <input type="text" name="posX" />
-        Y <input type="text" name="posY" />
-        Z <input type="text" name="posZ" />
+    <form id="position" method="post" action="index.php">
+				X <input type="text" name="posX" />
+                Y <input type="text" name="posY" />
+                Z <input type="text" name="posZ" />
+				<input type="submit" value="Post" />	
     </form>
     <div id="text"></div>
     <div id="container"></div>
@@ -66,7 +81,7 @@
             cube.position.y = y;
             cube.position.z = z;
             scene.add( cube );
-        }     
+        }  
 
         function animate() {
             requestAnimationFrame( animate );
@@ -84,21 +99,15 @@
             document.getElementById("text").innerHTML = x + " " + y + " " + z;            
         }
 
-        function updateCube(){
-            cube = scene.getObjectByName( "cube" );
-            cube.position.x = document.getElementById("position").posX.value;
-            cube.position.y = document.getElementById("position").posY.value;
-            cube.position.z = document.getElementById("position").posZ.value;           
-            renderer.render( scene, camera ); 
-            print("cube");           
-        }
-
     </script>
     <script>
-        setCubePosition("container", 
-            document.getElementById("position").posX.value, 
-            document.getElementById("position").posY.value, 
-            document.getElementById("position").posZ.value);
+        function setPosition(elementId, x, y, z){
+            document.getElementById(elementId).posX.value = x;
+            document.getElementById(elementId).posY.value = y;
+            document.getElementById(elementId).posZ.value = z;
+        }
+        setPosition("position", '<?php echo $posArray['X'] ?>', '<?php echo $posArray['Y'] ?>', '<?php echo $posArray['Z'] ?>');
+        setCubePosition("container", '<?php echo $posArray['X'] ?>', '<?php echo $posArray['Y'] ?>', '<?php echo $posArray['Z'] ?>');
     </script>    
 </body>
 </html>
