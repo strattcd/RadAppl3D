@@ -7,31 +7,33 @@
     <link rel="stylesheet" href="assets/stylesheets/main.css">
 </head>
 <body>
-    <form id="position" onchange="updateCube()">
+    <form id="addCube">
+        <button class="button" type="button" onclick="addCube()">Add</button>
         X <input type="text" name="posX" />
         Y <input type="text" name="posY" />
         Z <input type="text" name="posZ" />
     </form>
+    <!-- <form id="position" onchange="updateCube()">
+        Number <input class="number" type="text" name ="number" />
+        X <input type="text" name="posX" />
+        Y <input type="text" name="posY" />
+        Z <input type="text" name="posZ" />
+    </form>     -->
     <div id="text"></div>
     <div id="container"></div>
     <script src="../js/three.js"></script>
     <script>
 
-        function setCubePosition(elementId, x, y, z){
-
-            console.clear();
-
+        function createScene(elementId){
             var renderer, scene, camera, distance, raycaster, projector;
             var container = document.getElementById(elementId);
             var distance = 400;   
-
-            init(x,y,z);
-            animate();
-            print("cube");                     
-
+            var counter = "0";
+            init();
+            createCube(0,0,0, counter);             
         }
 
-        function init(x,y,z){
+        function init(){
             renderer = new THREE.WebGLRenderer();
             renderer.setSize( 500, 250 );
             renderer.setClearColor(0x888888, 1);
@@ -50,55 +52,58 @@
             light_two.position.set(-100, 800, 800);
             //And another global lightning some sort of cripple GL
             lightAmbient = new THREE.AmbientLight(0x404040);
-            scene.add(light, light_two, lightAmbient);            
-            
-
-            createCube(x,y,z); 
-            renderer.render(scene, camera);
+            scene.add(light, light_two, lightAmbient);
         }
 
-        function createCube(x, y, z){
+        function addCube(counter){
+            counter += 1;
+            x=document.getElementById("addCube").posX.value
+            y=document.getElementById("addCube").posY.value
+            z=document.getElementById("addCube").posZ.value
+            createCube(x,y,z, counter);
+            return false;
+        }
+
+
+        function createCube(x, y, z, counter){
             var geometry = new THREE.BoxGeometry();
             var material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
             var cube = new THREE.Mesh( geometry, material );
-            cube.name = "cube";
+            cube.name = "cube"+counter;
             cube.position.x = x;
             cube.position.y = y;
-            cube.position.z = z;
-            scene.add( cube );
+            cube.position.z = z; 
+            scene.add( cube );  
+            renderer.render( scene, camera );                      
         }     
 
         function animate() {
-            requestAnimationFrame( animate );
-            cube = scene.getObjectByName( "cube" );
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;           
-            renderer.render( scene, camera );
+            requestAnimationFrame( animate );         
+            rotateCube();
         }
 
-        function print(name){
-            cube = scene.getObjectByName( name );
-            var x =  cube.position.x;
-            var y =  cube.position.y;
-            var z =  cube.position.z;
-            document.getElementById("text").innerHTML = x + " " + y + " " + z;            
+        function rotateCube(){    
+            cube = scene.getObjectByName("cube");
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;                    
         }
+
 
         function updateCube(){
             cube = scene.getObjectByName( "cube" );
-            cube.position.x = document.getElementById("position").posX.value;
-            cube.position.y = document.getElementById("position").posY.value;
-            cube.position.z = document.getElementById("position").posZ.value;           
+            cube.position.x = document.getElementById("addCube").posX.value;
+            cube.position.y = document.getElementById("addCube").posY.value;
+            cube.position.z = document.getElementById("addCube").posZ.value;           
             renderer.render( scene, camera ); 
-            print("cube");           
+            print(counter);           
         }
 
     </script>
     <script>
-        setCubePosition("container", 
-            document.getElementById("position").posX.value, 
-            document.getElementById("position").posY.value, 
-            document.getElementById("position").posZ.value);
+        createScene("container");
+            // document.getElementById("addCube").posX.value, 
+            // document.getElementById("addCube").posY.value, 
+            // document.getElementById("addCube").posZ.value);
     </script>    
 </body>
 </html>

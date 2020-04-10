@@ -13,3 +13,13 @@ html, body {
     display: block;
     background-color: #fff;
   }
+
+  .number {
+    width: 15px;
+    display: inline-block;
+  }
+
+  .add {
+    width: 50px;
+    display: inline-block;
+  }
