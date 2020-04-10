@@ -1,25 +1,39 @@
 html, body {
     margin: 0;
     height: 100%;
+    font-family: Arial;
   }
+
   #container {
-    width: 200px;
-    height: 100px;
-    display: block;
+    width: 400px;
+    height: 200px;
+    display: inline-block;
     background-color: white;
   }
 
-  #text {
-    display: block;
+  .text {
+    display: inline-block;
     background-color: #fff;
+    vertical-align: top;
+    
   }
 
   .number {
-    width: 15px;
+    width: 75px;
     display: inline-block;
   }
 
   .add {
-    width: 50px;
+    width: 75px;
     display: inline-block;
+  }
+
+  .title {
+    display: block;
+    font-weight: bold;
+  }
+
+  #output{
+    display: block;
+    font-weight: lighter;
   }
