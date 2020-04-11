@@ -6,7 +6,7 @@ html, body {
 
   #container {
     width: 400px;
-    height: 200px;
+    height: 300px;
     display: inline-block;
     background-color: white;
   }
@@ -36,4 +36,18 @@ html, body {
   #output{
     display: block;
     font-weight: lighter;
+  }
+
+  #sim img{
+    width: 400px;
+    height: auto;
+  }
+
+  #sim h2{
+    display: inline-block;
+  }
+
+  #sim button{
+    width: 50px;
+    padding: 10px;
   }

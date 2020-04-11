@@ -18,6 +18,11 @@
         <div class="title">Geant4 Detector Class</div>
         <div id="output">Output</div>
     </div>
+    <div id="sim">
+        Simulation with  <a href="https://geant4.web.cern.ch/">Geant4</a> 
+        <button>Run</button><br>
+        <img src="./assets/images/sim0.png" alt="Cube Simulation">
+    </div>
     <script type="module">
         import * as THREE from "../js/three.module.js";
         import {OrbitControls} from "../js/OrbitControls.js";
@@ -42,7 +47,7 @@
             container.appendChild( renderer.domElement );
 
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera( 75, 2, 0.1, 1000 );
+            camera = new THREE.PerspectiveCamera( 75, 4/3, 0.1, 1000 );
             
 
             //LIGHTNING
