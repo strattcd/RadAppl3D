@@ -7,22 +7,45 @@
     <link rel="stylesheet" href="./assets/stylesheets/main.css">
 </head>
 <body>
+    <a class="stratton" href="https://strattonapp.com">
+        <img src="./assets/images/blue.png" onmouseover="hover(this);" onmouseout="unhover(this);" alt="Stratton App">
+    </a>
+    <div class="title">
+        <h2>Adding Cube Demonstration</h2>
+        <h3><a href="https://threejs.org/">Three.Js</a> with OrbitControls</h3>
+    </div>
     <form id="addCube">
-        <button class="add" type="button" onclick="addCube()">Add</button>
+        <button class="add" type="button" onclick="addCube();">Add</button>
         X <input class="number" type="text" name="posX" />
         Y <input class="number" type="text" name="posY" />
         Z <input class="number" type="text" name="posZ" />
     </form>
-    <div id="container"></div>
-    <div class="text">
-        <div class="title">Geant4 Detector Class</div>
-        <div id="output">Output</div>
+    <div id="container">        
+    </div><!--
+    --><div class="text">
+        <h3><a href="https://geant4.web.cern.ch/">Geant4</a> Detector Class Example</h3>
+        <div id="output">    
+            G4Box* world = new G4Box("World", 1.0, 1.0, 1.0); <br>
+            G4Box* cube = new G4Box("Cube", 0.5, 0.5, 0.5); <br>
+            new G4PVPlacement(0, G4ThreeVector(0.0, 0.0, 0.0)<br>
+        </div>
     </div>
     <div id="sim">
-        Simulation with  <a href="https://geant4.web.cern.ch/">Geant4</a> 
-        <button>Run</button><br>
-        <img src="./assets/images/sim0.png" alt="Cube Simulation">
+        Simulation (Work in Progress)<button onclick="simImage()">Demo</button><br>
+        <img id="simImage" src="./assets/images/demo.png" alt="Cube Simulation">
     </div>
+    <script>
+        function simImage() {
+            var number = Math.floor(Math.random() * 10); 
+            document.getElementById("simImage").src="./assets/images/sim" + number + ".png";
+        }
+        function hover(element) {
+            element.setAttribute('src', './assets/images/stratton.png');
+        }
+        function unhover(element) {
+            element.setAttribute('src', './assets/images/blue.png');
+        }      
+    </script>
     <script type="module">
         import * as THREE from "../js/three.module.js";
         import {OrbitControls} from "../js/OrbitControls.js";
@@ -43,7 +66,7 @@
         function init(){
             renderer = new THREE.WebGLRenderer();
             renderer.setSize( container.clientWidth, container.clientHeight );
-            renderer.setClearColor(0x888888, 1);
+            renderer.setClearColor(0x000000, 1);
             container.appendChild( renderer.domElement );
 
             scene = new THREE.Scene();
@@ -53,7 +76,7 @@
             //LIGHTNING
             //first point light
             var light = new THREE.PointLight(0xffffff, 1, 4000);
-            light.position.set(50, 0, 0);
+            light.position.set(-50, 0, 0);
             //the second one
             var light_two = new THREE.PointLight(0xffffff, 1, 4000);
             light_two.position.set(-100, 800, 800);
@@ -62,9 +85,9 @@
             scene.add(light, light_two, lightAmbient);
 
             controls = new OrbitControls(camera, renderer.domElement);
-            camera.position.z = 5;
-            camera.position.x= -3;
-            camera.position.y= 2;
+            camera.position.z = 3;
+            camera.position.x= -2;
+            camera.position.y= 1;
             controls.update();
         }
 
@@ -83,10 +106,10 @@
         window.addCube = addCube;
 
         function updateOutput(){
-            var text = "";
+            var text ='G4Box* world = new G4Box("World", 1.0, 1.0, 1.0); <br> G4Box* cube = new G4Box("Cube", 0.5, 0.5, 0.5); <br> new G4PVPlacement(0, G4ThreeVector(0.0, 0.0, 0.0) <br>';
             var i;
-            for (i=0; i<counter+1; i++){
-                text += xVector[i] + " , " + yVector[i] + " , " + zVector[i] + " <br> ";
+            for (i=1; i<counter+1; i++){
+                text += 'new G4PVPlacement(0, G4ThreeVector(' + xVector[i] + " , " + yVector[i] + " , " + zVector[i] + ") <br> ";
             }
             document.getElementById("output").innerHTML = text; 
         }
@@ -94,7 +117,7 @@
 
         function createCube(x, y, z, counter){
             var geometry = new THREE.BoxGeometry();
-            var material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+            var material = new THREE.MeshPhongMaterial( { color: 0xffffff } );
             var cube = new THREE.Mesh( geometry, material );
             cube.name = "cube"+counter;
             cube.position.x = x;

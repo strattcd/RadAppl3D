@@ -2,20 +2,54 @@ html, body {
     margin: 0;
     height: 100%;
     font-family: Arial;
+    box-sizing: border-box;
+  }
+
+  h2{
+    line-height: 36px;
+    font-size: 24px;    
+    font-weight: bolder;
+    margin: 0px;
+  }
+
+  h3{
+    font-weight: bold;
+    line-height: 24px;
+    font-size: 18px;
+    vertical-align: top;
+    margin: 0px;
+  }
+
+  .stratton img{
+      width: 200px;
+      height: auto;
+  }
+
+  .title {
+    display: block;
+    font-weight: bold;
+    margin: 10px;
+  }
+
+
+  #addCube{
+    margin: 10px;
   }
 
   #container {
-    width: 400px;
+    width: 396px;
     height: 300px;
     display: inline-block;
-    background-color: white;
+    background-color: #000;
+    margin-left: 20px;
+    border: 4px solid red;
   }
 
   .text {
     display: inline-block;
     background-color: #fff;
     vertical-align: top;
-    
+    margin-left: 10px;    
   }
 
   .number {
@@ -28,19 +62,13 @@ html, body {
     display: inline-block;
   }
 
-  .title {
-    display: block;
-    font-weight: bold;
-  }
-
   #output{
     display: block;
     font-weight: lighter;
   }
 
-  #sim img{
-    width: 400px;
-    height: auto;
+  #sim {
+    margin: 10px;
   }
 
   #sim h2{
@@ -48,6 +76,13 @@ html, body {
   }
 
   #sim button{
-    width: 50px;
+    width: 75px; 
+    padding: 10px;
+    margin-left: 125px;
+  }
+
+  #sim img{
+    width: 400px;
+    height: auto;
     padding: 10px;
   }
